@@ -18,20 +18,21 @@ def remove_background():
     image_file = request.files['image']
 
     try:
-        image = Image.open(image_file.stream)
+        with image_file.stream as stream:
+            image = Image.open(stream)
+
+            # Remove the background
+            result = remove(image)
+
+            # Convert to bytes
+            output = BytesIO()
+            result.save(output, format='PNG')
+            output.seek(0)
+
+            return send_file(output, mimetype='image/png')
+
     except Exception:
         return {"error": "Invalid image file"}, 400
-
-
-    # Remove the background
-    result = remove(image)
-
-    # Convert to bytes
-    output = BytesIO()
-    result.save(output, format='PNG')
-    output.seek(0)
-
-    return  send_file(output, mimetype='image/png')
 
 if __name__ == '__main__':
     app.run(debug=True)

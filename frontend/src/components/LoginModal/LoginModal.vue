@@ -38,7 +38,7 @@
                         <Adds v-if="!isSignup"/>
                         <Button :text="isSignup ? 'Sign up' : 'Login'" />
                         <div v-if="!isSignup" class="text-sm font-medium text-gray-500 dark:text-gray-300">
-                            Not registered? <a @click="isSignup = !isSignup" class="text-blue-700 hover:underline dark:text-blue-500">Create account</a>
+                            Not registered? <a @click="isSignup = !isSignup" class="text-blue-700 hover:underline dark:text-blue-500 cursor-pointer">Create account</a>
                         </div>
                     </form>
                 </div>

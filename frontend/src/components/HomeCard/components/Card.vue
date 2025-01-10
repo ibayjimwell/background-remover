@@ -2,6 +2,7 @@
     import Text from './Text.vue';
     import Button from './Button.vue';
     import LoginModal from '../../LoginModal/LoginModal.vue';
+    import { RouterLink } from 'vue-router';
 
     export default {
         props: {
@@ -17,7 +18,8 @@
         components: {
             Text,
             Button,
-            LoginModal
+            LoginModal,
+            RouterLink
         }
     }
 </script>
@@ -31,11 +33,12 @@
         :desc="desc"
         />
 
-        <Button 
-        v-if="!isForLogin"
-        :href="href" 
-        :text="buttonText"
-        />
+        <RouterLink  v-if="!isForLogin" to="/main">
+            <Button 
+            :href="href" 
+            :text="buttonText"
+            />
+        </RouterLink>
 
         <Button 
         v-else

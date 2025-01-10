@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+
+const colors = require('tailwindcss/colors');
+
 export default {
   content: [
     "./index.html",
@@ -7,6 +10,9 @@ export default {
   ],
   theme: {
     extend: {},
+    colors: {
+      primary: colors.indigo
+    }
   },
   plugins: [
     require('flowbite/plugin')

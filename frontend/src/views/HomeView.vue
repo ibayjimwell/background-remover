@@ -1,11 +1,20 @@
 <script>
+    import { initFlowbite } from 'flowbite';
+    import Hero from '../components/Hero/Hero.vue';
+    import HomeCard from '../components/HomeCard/HomeCard.vue';
+
     export default {
         components: {
-            App: () => import('@/App.vue')
+            Hero,
+            HomeCard
+        },
+        mounted() {
+            initFlowbite();
         }
     }
 </script>
 
 <template>
-    <App />
+    <Hero />
+    <HomeCard />
 </template>

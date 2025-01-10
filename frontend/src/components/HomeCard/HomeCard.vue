@@ -20,6 +20,7 @@
         title="Login to your account"
         desc="If you want to have saving features when removing the background you need to Login or Signup."
         buttonText="Login"
+        isForLogin
         href="#"
         />
     </div>

@@ -1,17 +1,23 @@
 <script>
     import Text from './Text.vue';
     import Button from './Button.vue';
+    import LoginModal from '../../LoginModal/LoginModal.vue';
 
     export default {
         props: {
             title: String,
             desc: String,
             buttonText: String,
+            isForLogin: {
+                type: Boolean,
+                default: false
+            },
             href: String,
         },
         components: {
             Text,
-            Button
+            Button,
+            LoginModal
         }
     }
 </script>
@@ -26,9 +32,20 @@
         />
 
         <Button 
+        v-if="!isForLogin"
         :href="href" 
         :text="buttonText"
         />
+
+        <Button 
+        v-else
+        data-modal-target="authentication-modal" 
+        data-modal-toggle="authentication-modal"
+        :href="href" 
+        :text="buttonText"
+        />
+
+        <LoginModal />
 
     </article>
 </template>

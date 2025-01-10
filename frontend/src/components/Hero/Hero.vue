@@ -2,12 +2,18 @@
     import Text from './components/Text.vue';
     import Button from './components/Button.vue';
     import Image from './components/Image.vue';
+    import image from '../../assets/image.png';
 
     export default {
         components: {
             Text,
             Button,
             Image
+        },
+        setup() {
+            return {
+                image
+            }
         }
     }
 </script>
@@ -33,7 +39,7 @@
                 />
 
             </div>
-            <Image src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/phone-mockup.png"/>            
+            <Image :src="image"/>            
         </div>
     </section>
 </template>

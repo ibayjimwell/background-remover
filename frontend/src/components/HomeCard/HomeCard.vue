@@ -11,14 +11,14 @@
 <template>
     <div class="flex flex-col md:flex-row gap-4 px-2 py-4 md:py-8 md:w-screen md:justify-center">
         <Card 
-        title="Noteworthy technology acquisitions 2021"
-        desc="Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order."
+        title="Continue to background remover app"
+        desc="If you want to remove the background without saving the image and just download it click continue ."
         buttonText="Continue"
         href="#"
         />
         <Card 
-        title="Noteworthy technology acquisitions 2021"
-        desc="Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order."
+        title="Login to your account"
+        desc="If you want to have saving features when removing the background you need to Login or Signup."
         buttonText="Login"
         href="#"
         />

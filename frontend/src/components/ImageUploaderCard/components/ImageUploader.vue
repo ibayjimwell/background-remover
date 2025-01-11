@@ -15,19 +15,52 @@
                 imageSrc: null,
                 fileName: null,
                 removing: false,
+                isDragging: false,
                 outputImgSrc: []
             }
         },
         methods: {
+
+            // Handle drag-over event
+            handleDragOver(event) {
+                event.preventDefault();
+                this.isDragging = true;
+            },
+
+            // Handle drag-leave event
+            handleDragLeave() {
+                this.isDragging = false;
+            },
+
+            // Handle file drop event
+            handleFileDrop(event) {
+                event.preventDefault();
+                this.isDragging = false;
+
+                const file = event.dataTransfer.files[0]; // Get the first file
+                if (file) {
+                    this.processFile(file);
+                    this.$refs.fileInput.files = event.dataTransfer.files;
+                }
+            },
+
+            // Common logic to process the file
+            processFile(file) {
+                this.imageSrc = URL.createObjectURL(file); // Create preview URL
+                this.fileName = file.name; // Save file name
+            },
+
             handleFileUploadChange(e) {
                 const file = e.target.files[0];
                 this.imageSrc = URL.createObjectURL(file);
                 this.fileName = file.name
             },
+
             handleCancelClick() {
                 this.imageSrc = null;
                 this.fileName = null
             },
+
             handleFormSubmit() {
                 this.removing = true;
                 const formData = new FormData();
@@ -59,8 +92,14 @@
 
 <template>
     <form class="w-full max-w-lg md:max-w-xl p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-        <div class="flex items-center justify-center w-full">
-            <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-72 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+        <div 
+        class="flex items-center justify-center w-full"
+        @dragover.prevent="handleDragOver"
+        @dragleave="handleDragLeave"
+        @drop="handleFileDrop"
+        :class="{ 'bg-gray-100 dark:bg-gray-600': isDragging }"
+        >
+            <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-72 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                 <div class="flex flex-col items-center justify-center pt-5 pb-6">
                     <div v-if="!imageSrc" class="flex flex-col items-center justify-center">
                         <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">

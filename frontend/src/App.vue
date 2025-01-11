@@ -14,6 +14,6 @@
 
 <template>
     <RouterView />
-    <ThemeToggle />
     <Footer />
+    <ThemeToggle />
 </template>

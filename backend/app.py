@@ -18,6 +18,7 @@ def remove_background():
 
     # Get the image
     image_file = request.files['image']
+    original_filename = image_file.filename
 
     try:
         with image_file.stream as stream:
@@ -31,7 +32,10 @@ def remove_background():
             result.save(output, format='PNG')
             output.seek(0)
 
-            return send_file(output, mimetype='image/png')
+            if not original_filename.lower().endswith('.png'):
+                original_filename = f"{original_filename.rsplit('.', 1)[0]}.png"
+
+            return send_file(output, mimetype='image/png', as_attachment=True, download_name=original_filename)
 
     except Exception:
         return {"error": "Invalid image file"}, 400

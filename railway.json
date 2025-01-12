@@ -1,6 +1,0 @@
-{
-    "start": {
-      "cmd": "python backend/app.py",
-      "cwd": "backend"
-    }
-  }

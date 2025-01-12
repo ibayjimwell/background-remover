@@ -1,0 +1,9 @@
+{
+    "build": {
+      "builder": "python"
+    },
+    "start": {
+      "cmd": "python app.py",
+      "cwd": "backend"
+    }
+  }

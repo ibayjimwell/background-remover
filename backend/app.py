@@ -1,14 +1,14 @@
-from flask import Flask, request, send_file, render_template
+from flask import Flask, request, send_file, send_from_directory
 from rembg import remove
 from io import BytesIO
 from PIL import Image
 from flask_cors import cross_origin
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='dist', static_url_path='')
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return send_from_directory(app.static_folder, 'index.html')
 
 @app.route('/api/removebg', methods=['POST'])
 @cross_origin()
@@ -39,6 +39,13 @@ def remove_background():
 
     except Exception:
         return {"error": "Invalid image file"}, 400
+
+@app.route('/<path:path>')
+def serve_static(path):
+    try:
+        return send_from_directory(app.static_folder, path)
+    except:
+        return send_from_directory(app.static_folder, 'index.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

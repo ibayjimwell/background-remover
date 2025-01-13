@@ -16,7 +16,7 @@
                 fileName: null,
                 removing: false,
                 isDragging: false,
-                outputImgSrc: []
+                outputImgSrc: null
             }
         },
         methods: {
@@ -75,7 +75,7 @@
                     .then(response => {
                         const blob = new Blob([response.data], { type: 'image/png' });
                         const url = URL.createObjectURL(blob);
-                        this.outputImgSrc.push(url);
+                        this.outputImgSrc = url;
                         this.imageSrc = null;
                         this.fileName = null;
                         this.removing = false;
@@ -131,5 +131,5 @@
             <CancelButton @click="handleCancelClick" :isDisable="!(imageSrc && !removing)"/>
         </div>
     </form>
-    <ImageOutputCard v-for="image in outputImgSrc" :imageSrc="image" />
+    <ImageOutputCard v-if="outputImgSrc" :imageSrc="outputImgSrc" />
 </template>

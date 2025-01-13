@@ -1,8 +1,7 @@
-from flask import Flask, request, send_file, send_from_directory
-from rembg import remove
-from io import BytesIO
-from PIL import Image
+from flask import Flask, request, send_file, send_from_directory, jsonify
 from flask_cors import cross_origin
+import requests
+from io import BytesIO
 
 app = Flask(__name__, static_folder='dist', static_url_path='')
 
@@ -13,33 +12,36 @@ def index():
 @app.route('/api/removebg', methods=['POST'])
 @cross_origin()
 def remove_background():
-    if 'image' not in request.files:
-        return {"error": "No image file provided"}, 400
 
-    # Get the image
+    if 'image' not in request.files:
+        return jsonify({'error': 'No image provided'}), 400
+
     image_file = request.files['image']
-    original_filename = image_file.filename
 
     try:
-        with image_file.stream as stream:
-            image = Image.open(stream)
+        response = requests.post(
+            'https://api.remove.bg/v1.0/removebg',
+            files={'image_file': image_file.stream},  # Stream the image from the form-data
+            data={'size': 'auto'},
+            headers={'X-Api-Key': 'rDEkmymwt9qk9DNRShiaBCFk'},  # Replace with your API key
+        )
 
-            # Remove the background
-            result = remove(image)
-
-            # Convert to bytes
-            output = BytesIO()
-            result.save(output, format='PNG')
-            output.seek(0)
-
-            if not original_filename.lower().endswith('.png'):
-                original_filename = f"{original_filename.rsplit('.', 1)[0]}.png"
-
-            return send_file(output, mimetype='image/png', as_attachment=True, download_name=original_filename)
-
-    except Exception:
-        return {"error": "Invalid image file"}, 400
-
+        if response.status_code == requests.codes.ok:
+            # Return the processed image as a response
+            return send_file(
+                BytesIO(response.content),
+                mimetype='image/png',
+                as_attachment=True,
+                download_name='no-bg.png'
+            )
+        else:
+            return jsonify({
+                'error': 'Failed to remove background',
+                'details': response.json()  # Provide error details from remove.bg API
+            }), response.status_code
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
 @app.route('/<path:path>')
 def serve_static(path):
     try:

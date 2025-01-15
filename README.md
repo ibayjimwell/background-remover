@@ -19,14 +19,9 @@ Easily remove backgrounds from your photos and images with our powerful and intu
 
 ## Getting Started
 
+* [Background Remover](https://removebg.up.railway.app/) - Official Website
 1. Upload your image to our tool.
-2. Click "Remove Background" and our algorithm will do the rest.
-
-## Example Use Cases
-
-* [Example 1: Product Image](https://example.com/product-image)
-* [Example 2: Social Media Image](https://example.com/social-media-image)
-* [Example 3: Graphic Design Image](https://example.com/graphic-design-image)
+2. Click "Remove" and our algorithm will do the rest.
 
 ## Contributing
 
@@ -34,4 +29,4 @@ Contributions are welcome! If you'd like to contribute to this project, please f
 
 ## Acknowledgments
 
-* [Jimwell Ibay](https://your-website.com) - Creator and Maintainer
+* [Jimwell Ibay](https://mrjim.vercel.app/) - Creator and Maintainer

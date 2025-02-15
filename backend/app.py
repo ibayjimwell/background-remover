@@ -2,11 +2,18 @@ from flask import Flask, request, send_file, send_from_directory, jsonify
 from flask_cors import cross_origin
 import requests
 from io import BytesIO
+import os
 
 app = Flask(__name__, static_folder='dist', static_url_path='')
 
-@app.route('/')
-def index():
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve(path):
+    full_path = os.path.join(app.static_folder, path)
+    if path and os.path.exists(full_path):
+        # Serve the static file if it exists
+        return send_from_directory(app.static_folder, path)
+    # Fallback to index.html for Vue routes
     return send_from_directory(app.static_folder, 'index.html')
 
 @app.route('/api/removebg', methods=['POST'])
@@ -42,12 +49,6 @@ def remove_background():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
     
-@app.route('/<path:path>')
-def serve_static(path):
-    try:
-        return send_from_directory(app.static_folder, path)
-    except:
-        return send_from_directory(app.static_folder, 'index.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

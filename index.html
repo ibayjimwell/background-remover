@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Under Development</title>
+    <style>
+        :root {
+            --primary-blue: #1976d2;
+            --accent-orange: #ff9800;
+            --background-gradient: linear-gradient(135deg, #e3f2fd 0%, #fffde7 100%);
+            --card-bg: #fff;
+            --border-gray: #e0e3ea;
+            --text-dark: #263238;
+            --text-light: #607d8b;
+            --shadow: 0 6px 32px rgba(25, 118, 210, 0.10);
+        }
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background: var(--background-gradient);
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .app-bar {
+            background: var(--primary-blue);
+            color: #fff;
+            padding: 0 32px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 10px rgba(25,118,210,0.08);
+        }
+        .center-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card {
+            background: var(--card-bg);
+            border: 1.5px solid var(--border-gray);
+            border-radius: 6px;
+            box-shadow: var(--shadow);
+            padding: 54px 44px 44px 44px;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            transition: box-shadow 0.2s;
+        }
+        .card:hover {
+            box-shadow: 0 12px 40px rgba(25, 118, 210, 0.16);
+        }
+        .icon-emoji {
+            width: 86px;
+            height: 86px;
+            background-color: var(--primary-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px auto;
+            font-size: 3.2rem;
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(25,118,210,0.13);
+            animation: bounce 1.3s infinite alternate;
+            user-select: none;
+        }
+        @keyframes bounce {
+            to { transform: translateY(-12px);}
+        }
+        h1 {
+            color: var(--primary-blue);
+            font-size: 2.1rem;
+            margin-bottom: 12px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+        .highlight {
+            color: var(--accent-orange);
+            font-weight: 800;
+        }
+        p {
+            color: var(--text-light);
+            font-size: 1.13rem;
+            margin-bottom: 0;
+            margin-top: 0;
+        }
+        .footer {
+            text-align: center;
+            color: #b0b8c9;
+            font-size: 1rem;
+            padding: 20px 0 12px 0;
+            letter-spacing: 0.2px;
+        }
+        @media (max-width: 480px) {
+            .card {
+                padding: 32px 10px 24px 10px;
+            }
+            .app-bar {
+                padding: 0 10px;
+                font-size: 1.08rem;
+            }
+            .icon-emoji {
+                width: 62px;
+                height: 62px;
+                font-size: 2.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-bar">
+        Student Management System
+    </div>
+    <div class="center-content">
+        <div class="card">
+            <div class="icon-emoji" title="Under Construction">🚧</div>
+            <h1>Under <span class="highlight">Development</span></h1>
+            <p>
+                We're working hard to launch something awesome.<br>
+                Please check back <span class="highlight">soon</span>!
+            </p>
+        </div>
+    </div>
+    <div class="footer">
+        &copy;2025 Student Management System. All rights reserved.
+    </div>
+</body>
+</html>
